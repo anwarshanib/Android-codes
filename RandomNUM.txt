@@ -1,0 +1,3 @@
+Random rand = new Random();
+        int randomnum = rand.nextInt(6);
+        Log.i("Random","Random number is " + randomnum );
