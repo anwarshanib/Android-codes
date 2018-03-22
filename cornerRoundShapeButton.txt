@@ -12,3 +12,16 @@
         android:topLeftRadius="10dp"
         android:topRightRadius="10dp" />
 </shape>
+
+//Button specification in activity_main.xml
+
+<Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="playTapped"
+            android:background="@drawable/shape"/>   //add this one
+            android:text="@string/Play"
+            tools:text="@string/Play" />
+
+<Button
