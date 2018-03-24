@@ -1,14 +1,18 @@
 package com.example.studio.myaudio;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
 
     MediaPlayer mediaPlayer;
+    AudioManager audioManager;
     public  void playTapped(View view)
     {
       mediaPlayer.start();
@@ -28,7 +32,35 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-         mediaPlayer= MediaPlayer.create(this,R.raw.davis);  //this part is important. creating a mediaplayer object in Oncreate method that run automatically when app is start 
+         mediaPlayer= MediaPlayer.create(this,R.raw.davis);
+         //getting context from audio services
+        audioManager=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        int Mymaxvoulume=audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        int myCurrentVolume=audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+         //setting context value to seekbar
+        SeekBar seekBar=(SeekBar)findViewById(R.id.seekBar);
+        seekBar.setMax(Mymaxvoulume);
+        seekBar.setProgress(myCurrentVolume);
+
+        //setting on change Listener
+        seekBar.setOnSeekBarChangeListener(/*NEED TO TYPE new On*/new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+             audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, i,0); //only type here others are just empty
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+
 
 
 
@@ -38,3 +70,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 }
+
