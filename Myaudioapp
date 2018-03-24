@@ -1,0 +1,40 @@
+package com.example.studio.myaudio;
+
+import android.media.MediaPlayer;
+import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+
+public class MainActivity extends AppCompatActivity {
+
+    MediaPlayer mediaPlayer;
+    public  void playTapped(View view)
+    {
+      mediaPlayer.start();
+    }
+    public void pauseTapped(View view)
+    {
+     mediaPlayer.pause();
+    }
+    public void StopTapped(View view)
+    {
+    mediaPlayer.stop();
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+         mediaPlayer= MediaPlayer.create(this,R.raw.davis);  //this part is important. creating a mediaplayer object in Oncreate method that run automatically when app is start 
+
+
+
+
+
+
+
+    }
+}
