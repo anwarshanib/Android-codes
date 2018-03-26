@@ -1,0 +1,29 @@
+ //setting time line
+        final SeekBar timeline=(SeekBar)findViewById(R.id.timeline);
+        timeline.setMax(mediaPlayer.getDuration());
+
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+            timeline.setProgress(mediaPlayer.getCurrentPosition());
+            }
+        } ,0,2000);
+
+        //Listener for timeline
+
+        timeline.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                mediaPlayer.seekTo(i);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
